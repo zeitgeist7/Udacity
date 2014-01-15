@@ -6,10 +6,15 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		E4B7A30F18848AE4003E74A6 /* playground.py */ = {isa = PBXFileReference; explicitFileType = text.script.python; fileEncoding = 4; name = playground.py; path = Playground/playground.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		E4B7A30418848A94003E74A6 = {
 			isa = PBXGroup;
 			children = (
+				E4B7A30F18848AE4003E74A6 /* playground.py */,
 			);
 			sourceTree = "<group>";
 		};
