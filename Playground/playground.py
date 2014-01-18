@@ -1,84 +1,32 @@
-#########################################################################
-#                 10-row School abacus
-#                         by
-#                      Michael H
-#########################################################################
-#       Description partially extracted from from wikipedia 
-#
-#  Around the world, abaci have been used in pre-schools and elementary
-#
-# In Western countries, a bead frame similar to the Russian abacus but
-# with straight wires and a vertical frame has been common (see image).
-# Helps schools as an aid in teaching the numeral system and arithmetic
-#
-#         |00000*****   |     row factor 1000000000
-#         |00000*****   |     row factor 100000000
-#         |00000*****   |     row factor 10000000 
-#         |00000*****   |     row factor 1000000
-#         |00000*****   |     row factor 100000
-#         |00000*****   |     row factor 10000
-#         |00000*****   |     row factor 1000
-#         |00000****   *|     row factor 100     * 1
-#         |00000***   **|     row factor 10      * 2
-#         |00000**   ***|     row factor 1       * 3
-#                                        -----------    
-#                             Sum                123 
-#
-# Each row represents a different row factor, starting with x1 at the
-# bottom, ascending up to x1000000000 at the top row.     
-######################################################################
+# You are in the middle of a jungle. 
+# Suddenly you see an animal coming to you. 
+# Here is what you should do if the animal is:
 
-# TASK:
-# Define a procedure print_abacus(integer) that takes a positive integer
-# and prints a visual representation (image) of an abacus setup for a 
-# given positive integer value.
-# 
-# Ranking
-# 1 STAR: solved the problem!
-# 2 STARS: 6 < lines <= 9
-# 3 STARS: 3 < lines <= 6
-# 4 STARS: 0 < lines <= 3
+# zebra >> "Try to ride a zebra!"
+# cheetah >> If you are faster than a cheetah: "Run!" 
+#            If you are not: "Stay calm and wait!". 
+#            The speed of a cheetah is 115 km/h.
+# anything else >> "Introduce yourself!"
 
-def print_abacus(value):
-	wire = '00000*****'
-	for order in range(9, -1, -1):
-		print('|' + wire[:10-int(value/(10**order)%10)] + '   ' + wire[10-int(value/(10**order)%10):] + '|')
+# Define a procedure, jungle_animal, 
+# that takes as input a string and a number, 
+# an animal and your speed (in km/h), 
+# and prints out what to do.
+
+def jungle_animal(animal, my_speed):
+		if animal == "zebra":
+				print("Try to ride a zebra!")
+		elif animal == "cheetah":
+				if my_speed > 115:
+						print("Run!")
+				else:
+						print("Stay calm and wait!")
+		else:
+				print("Introduce yourself")
 
 
-###  TEST CASES
-print "Abacus showing 0:"
-print_abacus(0)
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-print "Abacus showing 12345678:"
-print_abacus(12345678)
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000****   *|
-#>>>|00000***   **|
-#>>>|00000**   ***|
-#>>>|00000*   ****|
-#>>>|00000   *****|
-#>>>|0000   0*****|
-#>>>|000   00*****|
-#>>>|00   000*****|
-print "Abacus showing 1337:"
-print_abacus(1337)
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000****   *|
-#>>>|00000**   ***|
-#>>>|00000**   ***|
-#>>>|000   00*****|
+jungle_animal('cheetah', 30)
+#>>> "Stay calm and wait!"
+
+jungle_animal('gorilla', 21)
+#>>> "Introduce yourself!"
