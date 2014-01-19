@@ -18,6 +18,9 @@ def nextDay(year, month, day):
 
 def equalDates(date1, date2):
 	return (date1[0] == date2[0]) and (date1[1] == date2[1]) and (date1[2] == date2[2])
+
+def isBeforeDate(date1, date2):
+    return (date1[0] < date2[0]) or (date1[1] < date2[1]) or (date1[2] < date2[2])
         
 def daysBetweenDates(year1, month1, day1, year2, month2, day2):
     """Returns the number of days between year1/month1/day1
