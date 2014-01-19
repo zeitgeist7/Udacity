@@ -14,7 +14,7 @@ def isLeapYear(year):
 def daysInMonth(year, month):
     numberOfDays = 0
     if month == 2:
-        return 28
+        return 29 if isLeapYear(year) else 28
     elif month in (1, 3, 5, 7, 8, 10, 12):
         return 31
     else:
@@ -80,7 +80,7 @@ testIsLeapYear()
 def testAllCases():
     print(testAllCases.__name__)
     test_cases = [((2012,9,30,2012,10,30),30), 
-                  ((2012,1,1,2013,1,1),360),
+                  ((2012,1,1,2013,1,1),366),
                   ((2012,9,1,2012,9,4),3),
                   ((2013,1,1,1999,12,31), "AssertionError")]
     
@@ -96,4 +96,4 @@ def testAllCases():
                 print "Nice job! Test case {0} correctly raises AssertionError!\n".format(args)
             else:
                 print "Check your work! Test case {0} should not raise AssertionError!\n".format(args)
-# testAllCases()  # all test cases
+testAllCases()  # all test cases
