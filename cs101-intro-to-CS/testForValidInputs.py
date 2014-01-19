@@ -8,10 +8,21 @@
 #
 # Hint
 # A whole year is 365 days, 366 if a leap year. 
+def isLeapYear(year):
+    return (year%4 == 0) and ((year%400 == 0) if ( year%100 == 0 ) else True)
+
+def daysInMonth(year, month):
+    numberOfDays = 0
+    if month == 2:
+        return 28
+    elif month in (1, 3, 5, 7, 8, 10, 12):
+        return 31
+    else:
+        return 30
 
 def nextDay(year, month, day):
     """Simple version: assume every month has 30 days"""
-    if day < 30:
+    if day < daysInMonth(year, month):
         return year, month, day + 1
     else:
         if month == 12:
@@ -36,14 +47,38 @@ def daysBetweenDates(year1, month1, day1, year2, month2, day2):
        in Gregorian calendar."""
     # program defensively! Add an assertion if the input is not valid!
     assert dateIsAfter(year2, month2, day2, year1, month1, day1)
-
     days = 0
     while dateIsAfter(year2, month2, day2, year1, month1, day1):
         days += 1
         (year1, month1, day1) = nextDay(year1, month1, day1)
     return days
 
-def test():
+'''
+1. write a stub daysInMonth(year, month) that always returns 30
+2. modify nextDay(year, month, day) to use daysInMonth(year, month)
+3. test nextDay(year, month, day) using stub in daysInMonth(year, month)
+
+4. modify daysInMonth(year, month) to be correct except for leap years
+5. test nextDay(year, month, day) using stub in daysInMonth(year, month)
+
+6. write isLeapYear(year)
+7. test isLeapYear(year)
+'''
+
+def testIsLeapYear():
+    years = ((1900,False), (2000,True), (1976,True), (1984,True), (2004,True), (1700,False))
+    for (year, answer) in years:
+            if isLeapYear(year) != answer:
+                print('Test failed with year: ' + str(year))
+            else:
+                print('Test passed')
+
+testIsLeapYear()
+'''
+8. test daysBetweenDates(...) for all test cases
+'''
+def testAllCases():
+    print(testAllCases.__name__)
     test_cases = [((2012,9,30,2012,10,30),30), 
                   ((2012,1,1,2013,1,1),360),
                   ((2012,9,1,2012,9,4),3),
@@ -60,5 +95,5 @@ def test():
             if answer == "AssertionError":
                 print "Nice job! Test case {0} correctly raises AssertionError!\n".format(args)
             else:
-                print "Check your work! Test case {0} should not raise AssertionError!\n".format(args)            
-test()
+                print "Check your work! Test case {0} should not raise AssertionError!\n".format(args)
+# testAllCases()  # all test cases
