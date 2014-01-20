@@ -12,13 +12,10 @@ def isLeapYear(year):
     return (year%4 == 0) and ((year%400 == 0) if ( year%100 == 0 ) else True)
 
 def daysInMonth(year, month):
-    numberOfDays = 0
-    if month == 2:
-        return 29 if isLeapYear(year) else 28
-    elif month in (1, 3, 5, 7, 8, 10, 12):
-        return 31
-    else:
-        return 30
+    daysInFebruary = 29 if isLeapYear(year) else 28
+    daysInMonth = [31, daysInFebruary, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
+    return daysInMonth[month - 1]
 
 def nextDay(year, month, day):
     """Simple version: assume every month has 30 days"""
