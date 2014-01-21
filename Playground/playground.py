@@ -1,96 +1,83 @@
-# THREE GOLD STARS
+# Investigating adding and appending to lists
 
-# Sudoku [http://en.wikipedia.org/wiki/Sudoku]
-# is a logic puzzle where a game
-# is defined by a partially filled
-# 9 x 9 square of digits where each square
-# contains one of the digits 1,2,3,4,5,6,7,8,9.
-# For this question we will generalize
-# and simplify the game.
+# If you run the following four lines of codes, what are list1 and list2?
 
-# Define a procedure, check_sudoku,
-# that takes as input a square list
-# of lists representing an n x n
-# sudoku puzzle solution and returns the boolean
-# True if the input is a valid
-# sudoku square and returns the boolean False
-# otherwise.
+list1 = [1,2,3,4]
+list2 = [1,2,3,4]
 
-# A valid sudoku square satisfies these
-# two properties:
+list1 = list1 + [5]
+list2.append(5)
 
-#   1. Each column of the square contains
-#       each of the whole numbers from 1 to n exactly once.
+# to check, you can print them out using the print statements below.
 
-#   2. Each row of the square contains each
-#       of the whole numbers from 1 to n exactly once.
+#print list1
+#print list2
 
-# You may assume the the input is square and contains at
-# least one row and column.
+'''The first list1 + [5] creates a new list and returns that while the other one (list2) still points to the same object that gets expanded to accomodate the number 5'''
 
-correct = [[1,2,3],
-           [2,3,1],
-           [3,1,2]]
+# What is the difference between these two pieces of code?
 
-incorrect = [[1,2,3,4],
-             [2,3,1,3],
-             [3,1,2,3],
-             [4,4,4,4]]
+def proc(mylist):
+    '''
+    Creates a 'new' list and appends the number 6 to the end of it
+    '''
+    mylist = mylist + [6]
 
-incorrect2 = [[1,2,3,4],
-             [2,3,1,4],
-             [4,1,2,3],
-             [3,4,1,2]]
+def proc2(mylist):
+    '''
+    Adds 6 to the end of the list and returns the 'same' object
+    '''
+    mylist.append(6)
 
-incorrect3 = [[1,2,3,4,5],
-              [2,3,1,5,6],
-              [4,5,2,1,3],
-              [3,4,5,2,1],
-              [5,6,4,3,2]]
+# Can you explain the results given by the four print statements below? Remove
+# the hashes # and run the code to check.
 
-incorrect4 = [['a','b','c'],
-              ['b','c','a'],
-              ['c','a','b']]
+#print list1
+#proc(list1)
+#print list1
 
-incorrect5 = [ [1, 1.5],
-               [1.5, 1]]
-               
+#print list2
+#proc2(list2)
+#print list2
 
-def union(p,q):
-    for e in q:
-        if e not in p:
-            p.append(e)
+# Python has a special assignment syntax: +=.  Here is an example:
 
-def check_sudoku(solution):
-    sizeOfSolution =  len(solution)
-    numbersList = [number for number in range(1, sizeOfSolution + 1)]  # list of numbers to test against
-    for row in solution:
-        union(numbersList, row)
-        if (sizeOfSolution != len(set(row))) or (len(numbersList) != sizeOfSolution):
-            return False
-    for columnIndex in range(sizeOfSolution): # this is working because we assume that the solution is a square
-        column = [c[columnIndex] for c in solution]
-        union(numbersList, column)
-        if ( sizeOfSolution != len(set(column)) ) or (len(numbersList) != sizeOfSolution):
-            return False
-    return True
+list3 = [1,2,3,4]
+list3 += [5]
+
+# Does this behave like list1 = list1 + [5] or list2.append(5)? Write a
+# procedure, proc3 similar to proc and proc2, but for +=. When you've done
+# that check your conclusion using the print-procedure call-print code as
+# above.
+
+# What happens when you try:
+
+list1 = list1 + [7,8,9]
+list2.append([7,8,9])
+list3 += [7,8,9]
+
+# When you've understood the difference between the three methods,
+# write a procedure list_test which takes three lists as inputs. You should
+# mutate the first input list to include 'a' as the last entry, mutate the
+# second to include the entries 'a', 'b', 'c' and finally the last list should
+# not be mutated but a copy should be returned with the additional entry 'w'.
+
+def list_test():
+    # Your code here
+    pass # replace this line with your code
 
 
 
-print check_sudoku(incorrect)
-#>>> False
+first_input = [1,2,3]
+second_input = [4,5,6]
+third_input = [7,8,9]
 
-print check_sudoku(correct)
-#>>> True
+#print list_test(first_input, second_input, third_input)
+#>>> [7,8,9,'w']
+#print first_input
+#>>> [1,2,3,'a']
+#print second_input
+#>>> [4,5,6,'a','b','c']
+#print third_input
+#>>> [7,8,9]
 
-print check_sudoku(incorrect2)
-#>>> False
-
-print check_sudoku(incorrect3)
-#>>> False
-
-print check_sudoku(incorrect4)
-#>>> False
-
-print check_sudoku(incorrect5)
-#>>> False
