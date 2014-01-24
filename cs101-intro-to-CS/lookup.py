@@ -14,15 +14,13 @@ index = [['udacity', ['http://udacity.com', 'http://npr.org']],
          ['computing', ['http://acm.org']]]
 
 def lookup(index,keyword):
-    for entry in index:
-        if entry[0] == keyword:
-            return entry[1]
-    return []
+    return [entry[1] for entry in index if entry[0] == keyword]
 
 
 
 
 
 print lookup(index,'udacity')
+print lookup(index,'udac')
 #>>> ['http://udacity.com','http://npr.org']
 
