@@ -10,15 +10,13 @@
 # Make sure that you return the new htable
 
 def hashtable_update(htable,key,value):
-    resultValue = hashtable_lookup(htable, key)
-    if resultValue == None:
-        hashtable_add(htable, key, value)
-    else:
-        bucket = hashtable_get_bucket(htable, key)
-        for entry in bucket:
-            if entry[0] == key:
-                entry[1] = value
-    return htable
+    bucket = hashtable_get_bucket(htable, key)
+    for entry in bucket:
+        if entry[0] == key:
+            entry[1] = value
+            return
+    bucket.append([key, value])
+
 
 def hashtable_lookup(htable,key):
     bucket = hashtable_get_bucket(htable,key)
