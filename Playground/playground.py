@@ -1,57 +1,36 @@
-# Define a procedure,
+# Write a procedure, shift_n_letters which takes as its input a lowercase
+# letter, a-z, and an integer n, and returns the letter n steps in the
+# alphabet after it. Note that 'a' follows 'z', and that n can be positive,
+#negative or zero.
 
-# hashtable_update(htable,key,value)
+def shift_n_letters(letter, n):
+    """
+    Strategy:
+    1. Bring the origin to 'a'
+        ord(letter) - ord('a')
+    2. Apply the shift
+        shiftedPosition = ord(letter) - ord('a') + 1
+    3. Account for the case we we overflow beyond 'z' by taking the 'modulo'
+        calibratedPosition = shiftedPosition % 26
+    4. Bring position to real chr postion in the ascii table by applying the 'a' shift
+        ans = calibratedPosition + ord('a')
+    5. Finally take the chr() of the position
+        return chr(ans)
 
-# that updates the value associated with key. If key is already in the
-# table, change the value to the new value. Otherwise, add a new entry
-# for the key and value.
+    And in one line, it goes like:
 
-# Hint: Use hashtable_lookup as a starting point.
-# Make sure that you return the new htable
+    """
 
-def hashtable_update(htable,key,value):
-    bucket = hashtable_get_bucket(htable, key)
-    for entry in bucket:
-        if entry[0] == key:
-            entry[1] = value
-            return
-    bucket.append([key, value])
+    return chr((((ord(letter) - ord('a') + n) % 26) + ord('a')))
 
+print shift_n_letters('s', 1)
+#>>> t
+print shift_n_letters('s', 2)
+#>>> u
+print shift_n_letters('s', 10)
+#>>> c
+print shift_n_letters('s', -10)
+#>>> i
+print shift_n_letters('a', -1)
+#>>> z
 
-def hashtable_lookup(htable,key):
-    bucket = hashtable_get_bucket(htable,key)
-    for entry in bucket:
-        if entry[0] == key:
-            return entry[1]
-    return None
-
-def hashtable_add(htable,key,value):
-    bucket = hashtable_get_bucket(htable,key)
-    bucket.append([key,value])
-
-
-def hashtable_get_bucket(htable,keyword):
-    return htable[hash_string(keyword,len(htable))]
-
-def hash_string(keyword,buckets):
-    out = 0
-    for s in keyword:
-        out = (out + ord(s)) % buckets
-    return out
-
-def make_hashtable(nbuckets):
-    table = []
-    for unused in range(0,nbuckets):
-        table.append([])
-    return table
-
-
-table = [[['Ellis', 11], ['Francis', 13]], [], [['Bill', 17], ['Zoe', 14]], [['Coach', 4]], [['Louis', 29], ['Nick', 2], ['Rochelle', 4]]]
-
-hashtable_update(table, 'Bill', 42)
-hashtable_update(table, 'Rochelle', 94)
-hashtable_update(table, 'Zed', 68)
-print table
-#>>> [[['Ellis', 11], ['Francis', 13]], [['Zed', 68]], [['Bill', 42], 
-#>>> ['Zoe', 14]], [['Coach', 4]], [['Louis', 29], ['Nick', 2], 
-#>>> ['Rochelle', 94]]]
