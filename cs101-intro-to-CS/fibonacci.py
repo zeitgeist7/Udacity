@@ -24,3 +24,4 @@ print fibonacci(1)
 #>>> 1
 print fibonacci(15)
 #>>> 610
+print fibonacci(2)
