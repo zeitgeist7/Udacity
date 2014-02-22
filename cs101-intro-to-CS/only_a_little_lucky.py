@@ -40,15 +40,14 @@ def sortedUrls(urls, ranks, keyword):
         return urls
     else:
         pivot = urls[0]
-        lessThan, greaterThan = [url for url in urls[1:] if ranks[url] < ranks[pivot]], [url for url in urls[1:] if ranks[url] >= ranks[pivot]]
-        result = []
-        if lessThan:
-            result = result + sortedUrls(lessThan, ranks, keyword)
-        result = result + [pivot]
-        if greaterThan:
-            result = result + sortedUrls(greaterThan, ranks, keyword)
-    return result
-    
+        lessThan, greaterThan = [], []
+        for url in urls[1:]:
+            if ranks[url] < ranks[pivot]:
+                lessThan.append(url)
+            else:
+                greaterThan.append(url)
+        return sortedUrls(lessThan, ranks, keyword) + [pivot] + sortedUrls(greaterThan, ranks, keyword)
+
     
 
 cache = {
